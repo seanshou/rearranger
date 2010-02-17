@@ -47,7 +47,7 @@ public final class Rearranger
 // ------------------------------ FIELDS ------------------------------
 
     public  static final String COMPONENT_NAME = "Rearranger";
-    public  static final String VERSION        = "5.0";
+    public  static final String VERSION        = "5.1";
     private static final Logger logger         = Logger.getLogger("com.wrq.rearranger");
 
     private transient RearrangerSettingsPanel preferencesPanel;

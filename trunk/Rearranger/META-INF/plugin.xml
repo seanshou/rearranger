@@ -8,12 +8,11 @@
 </description>
 
     <change-notes>
-        1) Recompiled with -target 1.5 so plugin will work on Mac 64-bit OS.
-        2) Compiled for IDEA 9.0.1.
+        1) Really this time: recompiled with -target 1.5 so plugin will work on Mac 64-bit OS.
     </change-notes>
 
 	<!-- plugin version: ALSO CHANGE CONSTANT IN Rearranger.java -->
-	<version>5.0</version>
+	<version>5.1</version>
 	<vendor email="dave.kriewall at gmail.com" url="">Dave Kriewall</vendor>
 
 	<!-- minimum and maximum IDEA version plugin is supposed to work with -->
