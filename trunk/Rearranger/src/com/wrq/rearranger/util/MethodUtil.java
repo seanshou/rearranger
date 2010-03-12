@@ -157,6 +157,8 @@ public final class MethodUtil
         if (i_method.getBody()      == null      ) return false;
         if (nofParameters(i_method) != 1         ) return false;
         if (!i_method.getName().startsWith("set")) return false;
+        String i_methodNameTrail = i_method.getName().substring("set".length());
+        if (i_methodNameTrail.length() == 0) return false;
         /** if setter body is immaterial, it can be empty.  Otherwise, it must contain at least one statement. */
         if (nofStatements(i_method) == 0  &&
                 gsd.getSetterBodyCriterion() != GetterSetterDefinition.SETTER_BODY_IMMATERIAL) return false;
@@ -169,18 +171,13 @@ public final class MethodUtil
         PsiAssignmentExpression assignment        = null;
         String                  lExpression       = null;
         String                  parameterName     = null;
-        String                  i_methodNameTrail = null;
         if (psiElement instanceof PsiAssignmentExpression) {
             assignment        = (PsiAssignmentExpression) psiElement;
             lExpression       = ((assignment.getLExpression()).getText()).replaceFirst("this.", "");
             parameterName     = (i_method.getParameterList()).getParameters()[0].getName();
-            i_methodNameTrail = i_method.getName().substring("set".length());
         }
 
-        String fieldName = null;
-        if (i_methodNameTrail != null) {
-            fieldName = fieldName(propertyNameFromMethodTrail(i_methodNameTrail), i_method.getProject());
-        }
+        String fieldName = fieldName(propertyNameFromMethodTrail(i_methodNameTrail), i_method.getProject());
         switch (gsd.getSetterNameCriterion())
         {
             case GetterSetterDefinition.SETTER_NAME_CORRECT_PREFIX:

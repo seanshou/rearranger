@@ -53,7 +53,7 @@ public class InteractiveTest
 {
     private RearrangerSettings rs;
     public static final String DEFAULT_CONFIGURATION_ROOT = ".."; // up one level from test
-    public static final String DEFAULT_CONFIGURATION = DEFAULT_CONFIGURATION_ROOT + "/src/defaultConfiguration.xml";
+    public static final String DEFAULT_CONFIGURATION = DEFAULT_CONFIGURATION_ROOT + "/src/com/wrq/rearranger/defaultConfiguration.xml";
 
     @Override
     protected String getTestDataPath()
