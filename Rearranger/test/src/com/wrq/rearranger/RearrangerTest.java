@@ -22,7 +22,6 @@
 package com.wrq.rearranger;
 
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -50,6 +49,7 @@ public class RearrangerTest
 {
     private RearrangerSettings rs;
 
+    static
     {
         BasicConfigurator.configure();
         Logger logger = Logger.getLogger("com.wrq.rearranger");
@@ -58,6 +58,7 @@ public class RearrangerTest
 //        logger.setLevel(Level.DEBUG);
         logger.setLevel(Level.INFO);
     }
+
     @Override
     protected String getTestDataPath()
     {
@@ -244,6 +245,7 @@ public class RearrangerTest
     /**
      * Delete old comment and insert (identical) new one.  This tests proper identification and deletion of old
      * comments.
+     * @throws Exception test exception
      */
     public final void testReplayComment() throws Exception
     {
@@ -1140,6 +1142,7 @@ public class RearrangerTest
 
     /**
      *  Submitted by Brian Buckley.
+     * @throws Exception test exception
      */
     public void testSpacingConflictingSettingBug() throws Exception
     {
@@ -1428,7 +1431,7 @@ public class RearrangerTest
         rs.addItem(ica, itemIndex++);
         ma = new MethodAttributes();
         ma.getStAttr().setValue(true);
-        rs.addItem(ma, itemIndex++);
+        rs.addItem(ma, itemIndex);
         rs.getExtractedMethodsSettings().setMoveExtractedMethods(true);
         rs.getExtractedMethodsSettings().setBelowFirstCaller(false);
         rs.getExtractedMethodsSettings().setDepthFirstOrdering(true);
@@ -1671,7 +1674,7 @@ public class RearrangerTest
      * When comment is removed, blank lines now precede the item.  Comment is inserted
      * at the beginning (i.e. before the blank lines) and a newline character is
      * prefixed to the comment.  Net effect is that new blank line(s) appear after the comment.
-     * @throws Exception
+     * @throws Exception test exception
      */
     public void testGeneratedCommentSpacingBug() throws Exception
     {
@@ -1860,7 +1863,7 @@ public class RearrangerTest
 
     /**
      * test detection of method overrides/overridden/implements/implemented attributes.
-     * @throws Exception
+     * @throws Exception test exception
      */
     public void testOverImpl() throws Exception
     {
@@ -2055,7 +2058,15 @@ public class RearrangerTest
         final PsiMethod method = aClass.getMethods()[0];
         final PsiMethod[] superMethods = method.findSuperMethods();
         assertEquals(1, superMethods.length);
-        assertEquals("java.lang.Object", superMethods[0].getContainingClass().getQualifiedName());
+        PsiClass psiClass = superMethods[0].getContainingClass();
+        if (psiClass == null)
+        {
+            fail("missing containing class");
+        }
+        else
+        {
+            assertEquals("java.lang.Object", psiClass.getQualifiedName());
+        }
     }
 
     public void testSortingOriginalOrder() throws Exception
@@ -2230,7 +2241,6 @@ public class RearrangerTest
         configureByFile("/com/wrq/rearranger/CommentSeparatorTest1.java");
         final PsiFile file = getFile();
         final Document doc = PsiDocumentManager.getInstance(getProject()).getDocument(file);
-        Editor editor = LightCodeInsightTestCase.getEditor();
         final CommentRule c = new CommentRule();
         c.setCommentText("\n\t// Fields %FS%\n");
         c.setEmitCondition(CommentRule.EMIT_IF_ITEMS_MATCH_SUBSEQUENT_RULE);
@@ -2248,6 +2258,22 @@ public class RearrangerTest
         rah.setTabSize(4);
         rah.rearrangeDocument(getProject(), file, rs, doc);
         super.checkResultByFile("/com/wrq/rearranger/CommentSeparatorResult1.java");
+    }
 
+    public void testEmptySetter() throws Exception
+    {
+        configureByFile("/com/wrq/rearranger/BitFieldTest.java");
+        final PsiFile file = getFile();
+        final Document doc = PsiDocumentManager.getInstance(getProject()).getDocument(file);
+        final File physFile = new File(InteractiveTest.DEFAULT_CONFIGURATION);
+        rs = RearrangerSettings.getSettingsFromFile(physFile);
+        rs.setAskBeforeRearranging(false);
+        rs.getAfterClassRBrace().setnBlankLines(2);
+        rs.getAfterClassRBrace().setForce(true);
+        rs.getNewlinesAtEOF().setForce(true);
+        rs.getNewlinesAtEOF().setnBlankLines(3);
+        final RearrangerActionHandler rah = new RearrangerActionHandler();
+        rah.rearrangeDocument(getProject(), file, rs, doc);
+        super.checkResultByFile("/com/wrq/rearranger/BitFieldResult.java");
     }
 }
