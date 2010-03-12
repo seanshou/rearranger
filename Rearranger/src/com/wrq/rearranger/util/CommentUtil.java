@@ -61,7 +61,7 @@ public class CommentUtil
         {
             // create only one Matcher for the global comment pattern.
             commentMatchers = new ArrayList<Matcher>(1);
-            commentMatchers.add(((Matcher)getMatcher(settings.getGlobalCommentPattern())));
+            commentMatchers.add((getMatcher(settings.getGlobalCommentPattern())));
         }
         else
         {

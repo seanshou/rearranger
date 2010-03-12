@@ -493,17 +493,25 @@ public class InterfaceAttributes
 
     public void addCommentPatternsToList(List<String> list)
     {
-        if (precedingComment                           != null &&
-            precedingComment.getCommentText         () != null &&
-            precedingComment.getCommentText().length() >  0      )
+        if (precedingComment != null)
         {
-            list.add(RegexUtil.escape(precedingComment.getCommentText()).replaceAll("%IF%", "[A-Za-z0-9_]+"));
+            addInterfaceCommentPatternToList(list, precedingComment.getCommentText());
         }
-        if (trailingComment                           != null &&
-            trailingComment.getCommentText         () != null &&
-            trailingComment.getCommentText().length() >  0      )
+        if (trailingComment != null)
         {
-            list.add(RegexUtil.escape(trailingComment.getCommentText()).replaceAll("%IF%", "[A-Za-z0-9_]+"));
+            addInterfaceCommentPatternToList(list, trailingComment.getCommentText());
+        }
+    }
+
+    private void addInterfaceCommentPatternToList(List<String> list, String commentText)
+    {
+        if (commentText != null && commentText.length() > 0)
+        {
+            String esc = RegexUtil.escape(commentText);
+            String fsp = commentFillString.getFillStringPattern();
+            esc = esc.replaceAll("%IF%", "[A-Za-z0-9_]+");
+            esc = esc.replaceAll("%FS%", fsp);
+            list.add(esc);
         }
     }
 }

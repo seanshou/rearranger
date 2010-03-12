@@ -8,12 +8,18 @@
 </description>
 
     <change-notes>
-        1) Fix problem where method named "set()" was incorrectly treated as a field setter ("setXXX()") function.  This
+        1) (Version 5.2)
+           Fix problem where method named "set()" was incorrectly treated as a field setter ("setXXX()") function.  This
            resulted in a NullPointerException due to a zero-length field name.
+        2) (Version 5.3)
+           Fix problem where interface rule whose preceding or trailing comment contained "%FS%" macro did not match
+           existing comments; these comments would not be deleted, and new comments cascaded in newly rearranged
+           source.
+        Thanks to Mathias Doenitz for reporting these bugs.
     </change-notes>
 
 	<!-- plugin version: ALSO CHANGE CONSTANT IN Rearranger.java -->
-	<version>5.2</version>
+	<version>5.3</version>
 	<vendor email="dave.kriewall at gmail.com" url="">Dave Kriewall</vendor>
 
 	<!-- minimum and maximum IDEA version plugin is supposed to work with -->
