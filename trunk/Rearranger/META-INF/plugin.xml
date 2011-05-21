@@ -1,4 +1,4 @@
-<idea-plugin version="2" url="http://rearranger.dev.java.net"> 
+<idea-plugin version="2" url="http://java.net/projects/rearranger">
 	<name>Rearranger</name>
 	<description>
  Rearranges (reorders) class and class member declarations according to a user-specified order and/or method call hierarchy;
@@ -8,22 +8,16 @@
 </description>
 
     <change-notes>
-        1) (Version 5.2)
-           Fix problem where method named "set()" was incorrectly treated as a field setter ("setXXX()") function.  This
-           resulted in a NullPointerException due to a zero-length field name.
-        2) (Version 5.3)
-           Fix problem where interface rule whose preceding or trailing comment contained "%FS%" macro did not match
-           existing comments; these comments would not be deleted, and new comments cascaded in newly rearranged
-           source.
-        Thanks to Mathias Doenitz for reporting these bugs.
+        1) (Version 5.4)
+          Recompiled for IDEA 10.5.
     </change-notes>
 
 	<!-- plugin version: ALSO CHANGE CONSTANT IN Rearranger.java -->
-	<version>5.3</version>
+	<version>5.4</version>
 	<vendor email="dave.kriewall at gmail.com" url="">Dave Kriewall</vendor>
 
 	<!-- minimum and maximum IDEA version plugin is supposed to work with -->
-	<idea-version since-build="8500"/>
+	<idea-version since-build="107.105"/>
 
 <application-components>
    <component>
