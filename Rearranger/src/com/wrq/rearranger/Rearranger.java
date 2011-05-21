@@ -47,7 +47,7 @@ public final class Rearranger
 // ------------------------------ FIELDS ------------------------------
 
     public  static final String COMPONENT_NAME = "Rearranger";
-    public  static final String VERSION        = "5.3";
+    public  static final String VERSION        = "5.4";
     private static final Logger logger         = Logger.getLogger("com.wrq.rearranger");
 
     private transient RearrangerSettingsPanel preferencesPanel;
@@ -126,10 +126,6 @@ public final class Rearranger
 
 // --------------------- Interface BaseComponent ---------------------
 
-    public String getComponentName()
-    {
-        return COMPONENT_NAME;
-    }
 
     public void initComponent()
     {
@@ -181,6 +177,13 @@ public final class Rearranger
         settings.writeExternal(our_element);
         element.getChildren().clear();
         element.addContent(our_element);
+    }
+
+// --------------------- Interface NamedComponent ---------------------
+
+    public String getComponentName()
+    {
+        return COMPONENT_NAME;
     }
 
 // --------------------- Interface UnnamedConfigurable ---------------------
