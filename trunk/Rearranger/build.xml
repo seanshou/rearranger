@@ -52,7 +52,7 @@
   
   <!-- JDK definitions -->
   
-  <property name="jdk.bin.idea_ic-93.94" value="C:/Program Files/Java/jdk1.6.0_25/bin"/>
+  <property name="jdk.bin.idea_ic-93.94" value="C:/Program Files/Java/jdk1.6.0_18/bin"/>
   <path id="jdk.classpath.idea_ic-93.94">
     <fileset dir="${jdk.home.idea_ic-93.94}">
       <include name="../../Java/jdk1.6.0_18/jre/lib/alt-rt.jar"/>

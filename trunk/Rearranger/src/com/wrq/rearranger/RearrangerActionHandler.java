@@ -173,11 +173,7 @@ public final class RearrangerActionHandler extends EditorActionHandler
 
     public static boolean isFileWritable(PsiElement element) {
           VirtualFile file = element.getContainingFile().getVirtualFile();
-          if (!file.isWritable()) {
-             VirtualFileManager.getInstance().fireReadOnlyModificationAttempt(new VirtualFile[]{file});
-             return file.isWritable();
-          }
-          return true;
+          return file != null && file.isWritable();
        }
 
     public final void rearrangeDocument(final Project            project ,
