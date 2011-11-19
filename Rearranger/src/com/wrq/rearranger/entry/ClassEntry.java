@@ -123,8 +123,7 @@ public class ClassEntry
                                                final PsiElement psiClass
     )
     {
-        final PsiManager psiManager = PsiManager.getInstance(project);
-        final PsiSearchHelper psh = psiManager.getSearchHelper();
+        final PsiSearchHelper psh = PsiSearchHelper.SERVICE.getInstance(project);
         int lastIndex = startingIndex;
         /**
          * if option indicates, don't parse inner class contents; leave them unchanged.

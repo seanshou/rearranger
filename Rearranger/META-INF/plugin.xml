@@ -8,16 +8,16 @@
 </description>
 
     <change-notes>
-        1) (Version 5.4)
-          Recompiled for IDEA 10.5.
+        1) (Version 5.5)
+          Recompiled for IDEA 11.  Thanks to Denis Zhdanov at IJ for the necessary patches.
     </change-notes>
 
 	<!-- plugin version: ALSO CHANGE CONSTANT IN Rearranger.java -->
-	<version>5.4</version>
+	<version>5.5</version>
 	<vendor email="dave.kriewall at gmail.com" url="">Dave Kriewall</vendor>
 
 	<!-- minimum and maximum IDEA version plugin is supposed to work with -->
-	<idea-version since-build="107.105"/>
+	<idea-version since-build="110.365"/>
 
 <application-components>
    <component>
